@@ -62,7 +62,6 @@ public class Tamagochi implements Runnable{
         }
     }
 
-
     /** Un único sitio donde se muere, para no duplicar mensajes. */
     private synchronized void morir(String motivo) {
         if (!vivo) {
@@ -75,7 +74,31 @@ public class Tamagochi implements Runnable{
 
     @Override
 	public void run() {
-        
+        try{
+            long contadorSegundos = 0;
+            while (vivo){
+                Thread.sleep(1000);
+                contadorSegundos +=1000;
+                tiempoVida -= 1000;
+                if (contadorSegundos >= 20000){
+                    contadorSegundos = 0;
+                    nivelSuciedad +=1;
+                    if (nivelSuciedad == 5){
+                        log("AVISO: el tamagochi "+ id +" esta muy sucio");
+                    }else if(nivelSuciedad >= 10){
+                        morir("Ha muerto por suciedad.");
+                    }
+
+                }
+                
+                if (tiempoVida <= 0){
+                    morir("Ha muerto de anciano.");
+                }
+            }
+
+        }catch (InterruptedException e){
+            System.out.println("Error en tamagochi");
+        }
     }
     
 }
