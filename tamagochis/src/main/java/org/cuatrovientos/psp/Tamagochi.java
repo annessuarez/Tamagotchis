@@ -1,5 +1,6 @@
 package org.cuatrovientos.psp;
 
+import java.util.Scanner;
 import java.util.Random;
 
 public class Tamagochi implements Runnable{    
@@ -50,6 +51,47 @@ public class Tamagochi implements Runnable{
         }
     } 
 
+    public synchronized void jugar(Scanner teclado) {
+        if (vivo && actividad.equals("NORMAL")) {
+            actividad = "JUGANDO";
+            log("Esta jugando.");
+
+            int operando1, operando2;
+            boolean esCorrecto = false;
+
+            while (!esCorrecto) {
+                
+                do {
+                    operando1 = rnd.nextInt(10);
+                    operando2 = rnd.nextInt(10);
+                } while (operando1 + operando2 >= 10);
+
+                int resultadoOperacion = operando1 + operando2;
+                System.out.println("Tamagotchi " + id + ": Cuanto es " + operando1 + " + " + operando2 + "?");
+
+                int respuestaUsuario;
+                boolean esNumero = false;
+                while (!esNumero) {
+                    try {
+                        respuestaUsuario = Integer.parseInt(teclado.nextLine());
+                        esNumero = true;
+                    } catch (NumberFormatException e) {
+                        log("No es un numero valido. Escribe un numero para responder:");
+                    }
+                }
+
+                if (respuestaUsuario == resultadoOperacion) {
+                    log("Has acertado!");
+                    esCorrecto = true;
+                } else {
+                    log("Incorrecto. Sigue jugando...");
+                }
+            }
+
+            log("Ha terminado de jugar.");
+            actividad = "NORMAL";
+        }
+    }
     public synchronized void limpiar(){
         if (vivo && actividad.equals("NORMAL")){
             try{
@@ -70,11 +112,11 @@ public class Tamagochi implements Runnable{
         if (vivo && actividad.equals("NORMAL")){
             morir("El cuidador " + cuidador + " ha decidido matar al tamagochi " + id);
         }else if (vivo){
-            log("No se puede matar ahora, está: " + actividad);
+            log("No se puede matar ahora, estÃ¡: " + actividad);
         }
     }
 
-    /** Un único sitio donde se muere, para no duplicar mensajes. */
+    /** Un Ãºnico sitio donde se muere, para no duplicar mensajes. */
     private synchronized void morir(String motivo) {
         if (!vivo) {
             return; // ya estaba muerto
