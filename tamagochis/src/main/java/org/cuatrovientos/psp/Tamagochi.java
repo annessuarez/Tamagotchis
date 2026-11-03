@@ -2,16 +2,20 @@ package org.cuatrovientos.psp;
 
 import java.util.Random;
 
-public class Tamagochi {
+public class Tamagochi implements Runnable{    
+    Random rnd = new Random();
+
     private int id;
+    private String cuidador;
+
     private long tiempoVida = 5*60*1000;
-    private int limpieza = 0; //ANNE: en 10 muere
-    private int suciedad = 20 * 1000; //ANNE: 20 segundos se ensucia
-    private int tiempoComer; //ANNE: milisegundos que tarda en comer
     private String actividad = "NORMAL";
     private boolean vivo = true;
-    private String cuidador;
-    Random rnd = new Random();
+
+    private int nivelSuciedad  = 0; //ANNE: en 10 muere
+    private int tiempoEnsuciarse = 20 * 1000; //ANNE: 20 segundos se ensucia
+    private int tiempoComer; //ANNE: milisegundos que tarda en comer
+    
 
     public Tamagochi (int id, String cuidador){
         this.id = id;
@@ -31,7 +35,7 @@ public class Tamagochi {
         if (vivo && actividad.equals("NORMAL")){
             try{
                 actividad = "COMIENDO";
-            log("Esta comiendo.");
+                log("Esta comiendo.");
                 Thread.sleep(tiempoComer);
             }catch(InterruptedException e){
                 return;
@@ -41,6 +45,22 @@ public class Tamagochi {
             actividad = "NORMAL";
         }
     } 
+
+    public synchronized void limpiar(){
+        if (vivo && actividad.equals("NORMAL")){
+            try{
+                actividad = "LIMPIANDO";
+                log("Se esta limpiando");
+                Thread.sleep(5000);
+                nivelSuciedad = 0;
+            }catch(InterruptedException e){
+                return;
+            }
+
+            log("Ha terminado de limpiarse.");
+            actividad = "NORMAL";
+        }
+    }
 
 
     /** Un único sitio donde se muere, para no duplicar mensajes. */
@@ -53,5 +73,9 @@ public class Tamagochi {
         log(motivo);
     }
 
+    @Override
+	public void run() {
+        
+    }
     
 }
