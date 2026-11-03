@@ -16,16 +16,29 @@ public class Tamagochi {
     public Tamagochi (int id, String cuidador){
         this.id = id;
         this.cuidador = cuidador;
-        this.hambre = 1000 + rnd.nextInt(9000);
+        this.tiempoComer = 1000 + rnd.nextInt(9000);
     }
 
     public int getId() {
         return id;
     }
 
-    public void comer(String comida){
-        if (vivo){
-            if 
+    private void log(String mensaje){
+        System.out.println("Tamagochi " + id + ": " + mensaje);
+    }
+
+    public synchronized void comer(String comida){
+        if (vivo && actividad.equals("NORMAL")){
+            try{
+                actividad = "COMIENDO";
+            log("Esta comiendo.");
+                Thread.sleep(tiempoComer);
+            }catch(InterruptedException e){
+                return;
+            }
+
+            log("Ha terminado de comer.");
+            actividad = "NORMAL";
         }
     } 
 
@@ -40,7 +53,5 @@ public class Tamagochi {
         log(motivo);
     }
 
-    private void log(String mensaje){
-        System.out.println("Tamagochi " + id + ": " + mensaje);
-    }
+    
 }
