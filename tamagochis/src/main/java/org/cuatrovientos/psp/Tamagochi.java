@@ -27,6 +27,10 @@ public class Tamagochi implements Runnable{
         return id;
     }
 
+    public boolean isVivo(){
+        return vivo;
+    }
+
     private void log(String mensaje){
         System.out.println("Tamagochi " + id + ": " + mensaje);
     }
@@ -35,7 +39,7 @@ public class Tamagochi implements Runnable{
         if (vivo && actividad.equals("NORMAL")){
             try{
                 actividad = "COMIENDO";
-                log("Esta comiendo.");
+                log("Esta comiendo " + comida);
                 Thread.sleep(tiempoComer);
             }catch(InterruptedException e){
                 return;
@@ -62,6 +66,14 @@ public class Tamagochi implements Runnable{
         }
     }
 
+    public synchronized void matar(){
+        if (vivo && actividad.equals("NORMAL")){
+            morir("El cuidador " + cuidador + " ha decidido matar al tamagochi " + id);
+        }else if (vivo){
+            log("No se puede matar ahora, está: " + actividad);
+        }
+    }
+
     /** Un único sitio donde se muere, para no duplicar mensajes. */
     private synchronized void morir(String motivo) {
         if (!vivo) {
@@ -70,6 +82,10 @@ public class Tamagochi implements Runnable{
         vivo = false;
         actividad = "MUERTO";
         log(motivo);
+    }
+
+    public synchronized String getEstado(){
+        return "Tamagochi " + id + ": vivo=" + vivo + ", actividad=" + actividad + ", nivel de suciedad (0/10)="+ nivelSuciedad; 
     }
 
     @Override
