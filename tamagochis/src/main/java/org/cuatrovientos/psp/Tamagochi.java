@@ -69,7 +69,7 @@ public class Tamagochi implements Runnable{
                 int resultadoOperacion = operando1 + operando2;
                 System.out.println("Tamagotchi " + id + ": Cuanto es " + operando1 + " + " + operando2 + "?");
 
-                int respuestaUsuario;
+                int respuestaUsuario = 0;
                 boolean esNumero = false;
                 while (!esNumero) {
                     try {
@@ -116,7 +116,7 @@ public class Tamagochi implements Runnable{
         }
     }
 
-    /** Un Ãºnico sitio donde se muere, para no duplicar mensajes. */
+    /** ANNE Un unico sitio donde se muere, para no duplicar mensajes. */
     private synchronized void morir(String motivo) {
         if (!vivo) {
             return; // ya estaba muerto
