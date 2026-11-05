@@ -41,12 +41,59 @@ public class App
             switch (respuestaUsuario) {
                 case "1":
                     System.out.println("1. Ver estado de los Tamagotchis");
-                    for tamagochi in tamagochis{
-                        tamagochis.getEstado();
+                    for (Tamagochi tamagochi : tamagochis){
+                        System.out.println(tamagochi.getEstado());
                     }
                     break;
                 
                 case "2":
+                    System.out.println("2. Alimentar Tamagotchi");
+                    System.out.println("IDs de los Tamagochis que tienes");
+                    for (Tamagochi tamagochi : tamagochis){
+                        System.out.println("Tamagochi: " + tamagochi.getId());
+                    }
+                    
+                    int respuestaID = 0;
+                    boolean esValido = false;
+
+                    do{
+                        System.out.println("Introduce el ID del tamagochi que quieres alimentar: ");
+                        try{
+                            respuestaID = Integer.parseInt(scan.nextLine());
+
+                            if (respuestaID >= 1 && respuestaID <= ConfigTamagochi.NUMERO_TAMAGOCHIS){
+                                esValido = true;
+                            }else{
+                                System.out.println("Error: la respuesta "+ respuestaID +" no es válida.");
+                            }
+
+                        }catch (Exception e) {
+                            System.out.println("Error: debes introducir un número válido.");
+                        }                    
+
+                    }while (!esValido);
+
+
+                    String respuestaComida = "";
+                    do{
+                        System.out.println("¿Qué quieres que coma el tamagochi? ");
+                        respuestaComida = scan.nextLine();
+
+                    } while (respuestaComida.isEmpty());
+                        
+
+                    //ANNE: se pone final porq las variables no cambien su valor
+                    final Tamagochi tamagochiElegido = tamagochis.get(respuestaID-1);
+                    final String comidaHilo = respuestaComida;
+                    Thread thread = new Thread(new Runnable()  //ANNE: de esta forma se deja libre el menu y se pueden hacer otras cosas
+                    {
+                        @Override
+                        public void run() {
+                            tamagochiElegido.comer(comidaHilo);
+                        }
+                    });
+                    thread.start();
+
                     
                     break;
 
