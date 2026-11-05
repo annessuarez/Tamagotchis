@@ -112,7 +112,7 @@ public class Tamagochi implements Runnable{
         if (vivo && actividad.equals("NORMAL")){
             morir("El cuidador " + cuidador + " ha decidido matar al tamagochi " + id);
         }else if (vivo){
-            log("No se puede matar ahora, estÃ¡: " + actividad);
+            log("No se puede matar ahora, esta¡: " + actividad);
         }
     }
 
