@@ -78,7 +78,6 @@ public class App
                     respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "jugar");
 
                     final Tamagochi tamagochiElegido = tamagochis.get(respuestaID-1);
-                    final String comidaHilo = respuestaComida;
                     Thread thread = new Thread(new Runnable()  
                     {
                         @Override
@@ -91,9 +90,20 @@ public class App
                     break;
                 
                 case "4":
+                    System.out.println("4. Limpiar Tamagotchi");
+                    respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "limpiar");
+
+                    final Tamagochi tamagochiElegido = tamagochis.get(respuestaID-1);
+                    Thread thread = new Thread(new Runnable()
+                    {
+                        @Override
+                        public void run() {
+                            tamagochiElegido.limpiar();
+                        }
+                    });
+                    thread.start();
                     
                     break;
-
                 case "5":
                     
                     break;
