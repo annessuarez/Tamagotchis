@@ -104,16 +104,9 @@ public class App
                     System.out.println("5. Matar Tamagotchi");
                     respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "matar");
 
-                    final Tamagochi tamagochiElegido = tamagochis.get(respuestaID-1);
-                    Thread thread = new Thread(new Runnable()
-                    {
-                        @Override
-                        public void run() {
-                            tamagochiElegido.matar();
-                        }
-                    });
-                    thread.start();
-                    
+                    Tamagochi tamagochiElegido = tamagochis.get(respuestaID-1);
+                    tamagochiElegido.matar();
+                                           
                     break;
                 }
                 case "6":
