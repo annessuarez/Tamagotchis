@@ -1,0 +1,6 @@
+target/
+tamagochis/target/
+*.class
+.vscode/
+.idea/
+*.iml
