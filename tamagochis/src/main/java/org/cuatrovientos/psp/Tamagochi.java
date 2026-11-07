@@ -13,9 +13,9 @@ public class Tamagochi implements Runnable{
     private String actividad = "NORMAL";
     private boolean vivo = true;
 
-    private int nivelSuciedad  = 0; //ANNE: en 10 muere
-    private int tiempoEnsuciarse = 20 * 1000; //ANNE: 20 segundos se ensucia
-    private int tiempoComer; //ANNE: milisegundos que tarda en comer
+    private int nivelSuciedad  = 0;
+    private int tiempoEnsuciarse = 20 * 1000;
+    private int tiempoComer;
     
 
     public Tamagochi (int id, String cuidador){
@@ -116,10 +116,9 @@ public class Tamagochi implements Runnable{
         }
     }
 
-    /** ANNE Un unico sitio donde se muere, para no duplicar mensajes. */
     private synchronized void morir(String motivo) {
         if (!vivo) {
-            return; // ya estaba muerto
+            return;
         }
         vivo = false;
         actividad = "MUERTO";

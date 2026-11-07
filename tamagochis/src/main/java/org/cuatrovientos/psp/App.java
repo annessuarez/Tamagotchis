@@ -61,10 +61,9 @@ public class App
 
                     } while (respuestaComida.isEmpty());
                         
-                    //ANNE: se pone final para garantizar que su valor no va a cambiar mientras se ejecuta el hilo
                     final Tamagochi tamagochiElegido = tamagochis.get(respuestaID-1);
                     final String comidaHilo = respuestaComida;
-                    Thread thread = new Thread(new Runnable()  //ANNE: de esta forma se deja libre el menu y se pueden hacer otras cosas
+                    Thread thread = new Thread(new Runnable()
                     {
                         @Override
                         public void run() {
@@ -81,7 +80,6 @@ public class App
                     respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "jugar");
 
                     Tamagochi tamagochiElegido = tamagochis.get(respuestaID-1);
-                    //ANNE: no hay que poner el Thread porq es una llamada normal y directa y el final tampoc porq no es necesario
                     tamagochiElegido.jugar(scan);
 
                     break;
