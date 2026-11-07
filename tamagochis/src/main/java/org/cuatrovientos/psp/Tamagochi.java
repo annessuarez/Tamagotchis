@@ -28,7 +28,7 @@ public class Tamagochi implements Runnable{
         return id;
     }
 
-    public boolean isVivo(){
+    public boolean estaVivo(){
         return vivo;
     }
 
@@ -127,7 +127,7 @@ public class Tamagochi implements Runnable{
     }
 
     public synchronized String getEstado(){
-        return "Tamagochi " + id + ": vivo=" + vivo + ", actividad=" + actividad + ", nivel de suciedad (0/10)="+ nivelSuciedad; 
+        return "Tamagochi " + id + ": actividad " + actividad + ", nivel de suciedad (0/10): " + nivelSuciedad;
     }
 
     @Override

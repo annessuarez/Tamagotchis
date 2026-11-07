@@ -44,7 +44,9 @@ public class App
                 case "1":
                     System.out.println("1. Ver estado de los Tamagotchis");
                     for (Tamagochi tamagochi : tamagochis){
-                        System.out.println(tamagochi.getEstado());
+                        if (tamagochi.estaVivo() == true){
+                            System.out.println(tamagochi.getEstado());
+                        }
                     }
                     break;
                 
@@ -125,7 +127,10 @@ public class App
     private static int mostrarTamagochisDevuelveID(ArrayList<Tamagochi> tamagochis, Scanner scan, String accion){  
         System.out.println("IDs de los Tamagochis que tienes");
         for (Tamagochi tamagochi : tamagochis){
-            System.out.println("Tamagochi: " + tamagochi.getId());
+            if (tamagochi.estaVivo() == true){
+                System.out.println("Tamagochi: " + tamagochi.getId());
+            }
+            
         }
         
         int respuestaID = 0;
@@ -137,8 +142,11 @@ public class App
                 respuestaID = Integer.parseInt(scan.nextLine());
 
                 if (respuestaID >= 1 && respuestaID <= ConfigTamagochi.NUMERO_TAMAGOCHIS){
-                    esValido = true;
-                    
+                    if (tamagochis.get(respuestaID -1).estaVivo() == true){
+                        esValido = true;
+                    } else {
+                        System.out.println("Error: el Tamagotchi " + respuestaID + " está muerto. No puedes " + accion + ".");
+                    }                   
 
                 }else{
                     System.out.println("Error: la respuesta "+ respuestaID +" no es válida.");
