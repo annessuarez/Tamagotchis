@@ -2,6 +2,10 @@
 Aplicación donde el programa principal (**Cuidador**) gestiona la vida y acciones de varios **Tamagochis** independientes.
 
 ---
+## Cambiar de rama
+Barra morada del Visual, abajo a la derecha clicar en el enlace que pone proyectoComentarios, sale menu desplegable, seleccionar branch MAIN
+
+---
 
 ## Requisitos Principales
 
