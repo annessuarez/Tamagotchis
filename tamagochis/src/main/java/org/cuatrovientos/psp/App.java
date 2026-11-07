@@ -48,7 +48,7 @@ public class App
                     }
                     break;
                 
-                case "2":
+                case "2":{
                     System.out.println("2. Alimentar Tamagotchi");
                     respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "comer");
 
@@ -72,8 +72,9 @@ public class App
                     thread.start();
 
                     break;
+                }
 
-                case "3":
+                case "3":{
                     System.out.println("3. Jugar con Tamagotchi");
                     respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "jugar");
 
@@ -88,8 +89,8 @@ public class App
                     thread.start();
 
                     break;
-                
-                case "4":
+                }
+                case "4":{
                     System.out.println("4. Limpiar Tamagotchi");
                     respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "limpiar");
 
@@ -104,7 +105,8 @@ public class App
                     thread.start();
 
                     break;
-                case "5":
+                }
+                case "5":{
                     System.out.println("5. Matar Tamagotchi");
                     respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "matar");
 
@@ -119,7 +121,7 @@ public class App
                     thread.start();
                     
                     break;
-
+                }
                 case "6":
                     System.out.println("Fin.");
                     salir = true;
@@ -133,7 +135,7 @@ public class App
     
     }
 
-    private static int mostrarTamagochisDevuelveID(ArrayList<Tamagochi> tamagochis, scan, accion){  
+    private static int mostrarTamagochisDevuelveID(ArrayList<Tamagochi> tamagochis, Scanner scan, String accion){  
         System.out.println("IDs de los Tamagochis que tienes");
         for (Tamagochi tamagochi : tamagochis){
             System.out.println("Tamagochi: " + tamagochi.getId());
