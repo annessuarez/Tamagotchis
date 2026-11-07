@@ -74,7 +74,20 @@ public class App
                     break;
 
                 case "3":
-                    
+                    System.out.println("3. Jugar con Tamagotchi");
+                    respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "jugar");
+
+                    final Tamagochi tamagochiElegido = tamagochis.get(respuestaID-1);
+                    final String comidaHilo = respuestaComida;
+                    Thread thread = new Thread(new Runnable()  
+                    {
+                        @Override
+                        public void run() {
+                            tamagochiElegido.jugar(scan);
+                        }
+                    });
+                    thread.start();
+
                     break;
                 
                 case "4":
