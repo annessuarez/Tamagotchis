@@ -2,6 +2,15 @@
 Aplicación donde el programa principal (**Cuidador**) gestiona la vida y acciones de varios **Tamagochis** independientes.
 
 ---
+## Ramas del proyecto
+
+* **`main`**: Rama principal con el proyecto final entregable.
+* **`ProyectoComentarios`**: Rama secundaria con notas y apuntes personales para el examen.
+
+> [!NOTE]  
+> Para la corrección, tomar como referencia únicamente la rama **`main`**.
+
+---
 
 ## Requisitos Principales
 
