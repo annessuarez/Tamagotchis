@@ -9,6 +9,8 @@ public class App
     {
         Scanner scan = new Scanner(System.in);
         String nombreCuidador = "";
+        int respuestaID;
+
         do{
             System.out.println("Introduce tu nombre (seras el cuidador): ");
             nombreCuidador = scan.nextLine();
@@ -48,31 +50,7 @@ public class App
                 
                 case "2":
                     System.out.println("2. Alimentar Tamagotchi");
-                    System.out.println("IDs de los Tamagochis que tienes");
-                    for (Tamagochi tamagochi : tamagochis){
-                        System.out.println("Tamagochi: " + tamagochi.getId());
-                    }
-                    
-                    int respuestaID = 0;
-                    boolean esValido = false;
-
-                    do{
-                        System.out.println("Introduce el ID del tamagochi que quieres alimentar: ");
-                        try{
-                            respuestaID = Integer.parseInt(scan.nextLine());
-
-                            if (respuestaID >= 1 && respuestaID <= ConfigTamagochi.NUMERO_TAMAGOCHIS){
-                                esValido = true;
-                            }else{
-                                System.out.println("Error: la respuesta "+ respuestaID +" no es válida.");
-                            }
-
-                        }catch (Exception e) {
-                            System.out.println("Error: debes introducir un número válido.");
-                        }                    
-
-                    }while (!esValido);
-
+                    respuestaID = mostrarTamagochisDevuelveID(tamagochis, scan, "comer");
 
                     String respuestaComida = "";
                     do{
@@ -81,7 +59,6 @@ public class App
 
                     } while (respuestaComida.isEmpty());
                         
-
                     //ANNE: se pone final porq las variables no cambien su valor
                     final Tamagochi tamagochiElegido = tamagochis.get(respuestaID-1);
                     final String comidaHilo = respuestaComida;
@@ -94,7 +71,6 @@ public class App
                     });
                     thread.start();
 
-                    
                     break;
 
                 case "3":
@@ -120,5 +96,36 @@ public class App
             }
         }
     
+    }
+
+    private static int mostrarTamagochisDevuelveID(ArrayList<Tamagochi> tamagochis, scan, accion){  
+        System.out.println("IDs de los Tamagochis que tienes");
+        for (Tamagochi tamagochi : tamagochis){
+            System.out.println("Tamagochi: " + tamagochi.getId());
+        }
+        
+        int respuestaID = 0;
+        boolean esValido = false;
+
+        do{
+            System.out.println("Introduce el ID del tamagochi que quieres "+accion+" : ");
+            try{
+                respuestaID = Integer.parseInt(scan.nextLine());
+
+                if (respuestaID >= 1 && respuestaID <= ConfigTamagochi.NUMERO_TAMAGOCHIS){
+                    esValido = true;
+                    
+
+                }else{
+                    System.out.println("Error: la respuesta "+ respuestaID +" no es válida.");
+                }
+
+            }catch (Exception e) {
+                System.out.println("Error: debes introducir un número válido.");
+            }                    
+
+        }while (!esValido);
+        
+        return respuestaID;
     }
 }
